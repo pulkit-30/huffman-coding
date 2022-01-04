@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+
 struct TNode
 {
     int freq;
@@ -109,11 +108,17 @@ void InOrder(struct TNode *T)
         InOrder(T->left);
         if (T->left == NULL && T->right == NULL)
         {
-            cout << " " << T->info << "    " << T->freq << "     ";
+            cout << T->info << "   ";
             for (int i = 0; i <= T->len; i++)
             {
-
-                cout << T->unicodes[i] << " ";
+                if (T->unicodes[i] == true)
+                {
+                    cout << 1 << " ";
+                }
+                else
+                {
+                    cout << 0 << " ";
+                }
             }
         }
         cout << endl;
@@ -156,28 +161,4 @@ void Unicodes(struct TNode **N, bool values[], int len)
         values[len + 1] = true;
         Unicodes(&(*N)->right, values, len + 1);
     }
-}
-int main()
-{
-    struct TNode *Start = NULL;
-    struct TNode *T = NULL;
-    Insert(&Start, GetTNode('a', 50));
-    Insert(&Start, GetTNode('r', 70));
-    Insert(&Start, GetTNode('e', 30));
-    Insert(&Start, GetTNode('n', 15));
-    Insert(&Start, GetTNode('t', 15));
-    Insert(&Start, GetTNode('s', 10));
-    // Transverse(Start);
-    T = BuildHuffmanntree(&Start);
-    bool values[100];
-    int len = -1;
-    Unicodes(&T, values, len);
-    cout << "Info"
-         << "  "
-         << "freq"
-         << "  "
-         << "  "
-         << "unicodes" << endl;
-    InOrder(T);
-    return 0;
 }
